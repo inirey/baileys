@@ -1,0 +1,621 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@adiwajshing/baileys</title>
+	<meta name="description" content="Documentation for @adiwajshing/baileys">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@adiwajshing/baileys</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@adiwajshing/baileys</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#baileys---typescriptjavascript-whatsapp-web-api" id="baileys---typescriptjavascript-whatsapp-web-api" style="color: inherit; text-decoration: none;">
+					<h1>Baileys - Typescript/Javascript WhatsApp Web API</h1>
+				</a>
+				<p> Baileys does not require Selenium or any other browser to be interface with WhatsApp Web, it does so directly using a <strong>WebSocket</strong>. Not running Selenium or Chromimum saves you like <strong>half a gig</strong> of ram :/ </p>
+				<p> Thank you to <a href="https://github.com/sigalor/whatsapp-web-reveng">@Sigalor</a> for writing the guide to reverse engineering WhatsApp Web and thanks to <a href="https://github.com/Rhymen/go-whatsapp/">@Rhymen</a> for the <strong>go</strong> implementation.</p>
+				<p> Baileys is type-safe, extensible and simple to use. If you require more functionality than provided, it&#39;ll super easy for you to write an extension. More on this <a href="#WritingCustomFunctionality">here</a>.</p>
+				<p> If you&#39;re interested in building a WhatsApp bot, you may wanna check out <a href="https://github.com/adiwajshing/WhatsappInfoBot">WhatsAppInfoBot</a> and an actual bot built with it, <a href="https://github.com/adiwajshing/Messcat">Messcat</a>.</p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h2>Example</h2>
+				</a>
+				<p>Do check out &amp; run <a href="Example/example.ts">example.ts</a> to see example usage of the library.
+					The script covers most common use cases.
+				To run the example script, download or clone the repo and then type the following in terminal:</p>
+				<ol>
+					<li><code>cd path/to/Baileys</code></li>
+					<li><code>npm install</code></li>
+					<li><code>npm run example</code></li>
+				</ol>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<p>Create and cd to your NPM project directory and then in terminal, write: </p>
+				<ol>
+					<li>stable: <code>npm install @adiwajshing/baileys</code></li>
+					<li>stabl-ish w quicker fixes &amp; latest features: <code>npm install github:adiwajshing/baileys</code></li>
+				</ol>
+				<p>Then import in your code using:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { WAClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span></code></pre>
+				<a href="#unit-tests" id="unit-tests" style="color: inherit; text-decoration: none;">
+					<h2>Unit Tests</h2>
+				</a>
+				<p>Baileys also comes with a unit test suite. Simply cd into the Baileys directory &amp; run <code>npm test</code>.</p>
+				<p>You will require a phone with WhatsApp to test, and a second WhatsApp number to send messages to.
+				Set the phone number you can randomly send messages to in a <code>.env</code> file with <code>TEST_JID=1234@s.whatsapp.net</code> </p>
+				<a href="#connecting" id="connecting" style="color: inherit; text-decoration: none;">
+					<h2>Connecting</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { WAClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connectToWhatsApp</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> WAClient() 
+    <span class="hljs-keyword">const</span> [user, chats, contacts] = <span class="hljs-keyword">await</span> client.connect ()
+    <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;oh hello &quot;</span> + user.name + <span class="hljs-string">&quot; (&quot;</span> + user.id + <span class="hljs-string">&quot;)&quot;</span>)
+    <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;you have &quot;</span> + chats.length + <span class="hljs-string">&quot; chats&quot;</span>)
+
+    <span class="hljs-comment">// every chat object has a list of most recent messages</span>
+    <span class="hljs-comment">// can use that to retreive all your pending unread messages</span>
+    <span class="hljs-comment">// the &#x27;count&#x27; property a chat object reflects the number of unread messages </span>
+    <span class="hljs-comment">// the &#x27;count&#x27; property is -1 if the entire thread has been marked unread</span>
+    <span class="hljs-keyword">const</span> unread = chats.all().flatMap (<span class="hljs-function"><span class="hljs-params">chat</span> =&gt;</span> chat.messages.slice(chat.messages.length-chat.count))
+
+    <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;you have &quot;</span> + unread.length + <span class="hljs-string">&quot; unread messages&quot;</span>)
+}
+
+<span class="hljs-comment">// run in main file</span>
+connectToWhatsApp ()
+.catch (<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;unexpected error: &quot;</span> + err) ) <span class="hljs-comment">// catch any errors</span></code></pre>
+				<p>If the connection is successful, you will see a QR code printed on your terminal screen, scan it with WhatsApp on your phone and you&#39;ll be logged in!
+				If you don&#39;t want to wait for WhatsApp to send all your chats while connecting, you can use the following function:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { WAClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">connectToWhatsApp</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> WAClient() 
+    <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> client.connectSlim ()
+    <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;oh hello &quot;</span> + user.name + <span class="hljs-string">&quot; (&quot;</span> + user.id + <span class="hljs-string">&quot;)&quot;</span>)
+
+    client.receiveChatsAndContacts () <span class="hljs-comment">// wait for chats &amp; contacts in the background</span>
+    .then (<span class="hljs-function">(<span class="hljs-params">[chats, contacts]</span>) =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;you have &quot;</span> + chats.all().length + <span class="hljs-string">&quot; chats and &quot;</span> + contacts.length + <span class="hljs-string">&quot; contacts&quot;</span>)
+    })
+}
+<span class="hljs-comment">// run in main file</span>
+connectToWhatsApp ()
+.catch (<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;unexpected error: &quot;</span> + err) ) <span class="hljs-comment">// catch any errors</span></code></pre>
+				<p>Do note, the <code>chats</code> object returned is now a <a href="https://github.com/adiwajshing/keyed-db">KeyedDB</a>. This is done for the following reasons:</p>
+				<ul>
+					<li>Most applications require chats to be ordered in descending order of time. (<code>KeyedDB</code> does this in <code>log(N)</code> time)</li>
+					<li>Most applications require pagination of chats (Use <code>chats.paginated()</code>)</li>
+					<li>Most applications require <strong>O(1)</strong> access to chats via the chat ID. (Use <code>chats.get(jid)</code> with <code>KeyedDB</code>)</li>
+				</ul>
+				<a href="#saving-amp-restoring-sessions" id="saving-amp-restoring-sessions" style="color: inherit; text-decoration: none;">
+					<h2>Saving &amp; Restoring Sessions</h2>
+				</a>
+				<p>You obviously don&#39;t want to keep scanning the QR code every time you want to connect. </p>
+				<p>So, do the following the first time you connect:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs&#x27;</span>
+
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> WAClient() 
+client.connectSlim() <span class="hljs-comment">// connect first</span>
+.then (<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> creds = client.base64EncodedAuthInfo () <span class="hljs-comment">// contains all the keys you need to restore a session</span>
+    fs.writeFileSync(<span class="hljs-string">&#x27;./auth_info.json&#x27;</span>, <span class="hljs-built_in">JSON</span>.stringify(creds, <span class="hljs-literal">null</span>, <span class="hljs-string">&#x27;\t&#x27;</span>)) <span class="hljs-comment">// save JSON to file</span>
+})</code></pre>
+				<p>Then, to restore a session:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> WAClient()
+client.connectSlim(<span class="hljs-string">&#x27;./auth_info.json&#x27;</span>) <span class="hljs-comment">// will load JSON credentials from file</span>
+.then (<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {
+    <span class="hljs-comment">// yay connected without scanning QR</span>
+})
+
+<span class="hljs-comment">/*
+    Optionally, you can load the credentials yourself from somewhere 
+    &amp; pass in the JSON object to connectSlim () as well.
+*/</span></code></pre>
+				<p>If you&#39;re considering switching from a Chromium/Puppeteer based library, you can use WhatsApp Web&#39;s Browser credentials to restore sessions too:</p>
+				<pre><code class="language-ts">client.loadAuthInfoFromBrowser (<span class="hljs-string">&#x27;./auth_info_browser.json&#x27;</span>)
+client.connectSlim(<span class="hljs-literal">null</span>, <span class="hljs-number">20</span>*<span class="hljs-number">1000</span>) <span class="hljs-comment">// use loaded credentials &amp; timeout in 20s</span>
+.then (<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span> {
+    <span class="hljs-comment">// yay! connected using browser keys &amp; without scanning QR</span>
+})</code></pre>
+				<p>See the browser credentials type <a href="/src/WAConnection/Constants.ts">here</a>.</p>
+				<a href="#qr-overriding" id="qr-overriding" style="color: inherit; text-decoration: none;">
+					<h2>QR Overriding</h2>
+				</a>
+				<p>If you want to do some custom processing with the QR code used to authenticate, you can override the following method:</p>
+				<pre><code class="language-ts">client.onReadyForPhoneAuthentication = <span class="hljs-function">(<span class="hljs-params">[ref, publicKey, clientID]</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> str = ref + <span class="hljs-string">&#x27;,&#x27;</span> + publicKey + <span class="hljs-string">&#x27;,&#x27;</span> + clientID <span class="hljs-comment">// the QR string</span>
+    <span class="hljs-comment">// Now, use &#x27;str&#x27; to display in QR UI or send somewhere</span>
+}
+<span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> client.connect ()</code></pre>
+				<p>If you need to regenerate the QR, you can also do so using:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">let</span> generateQR: <span class="hljs-keyword">async</span> () =&gt; <span class="hljs-built_in">void</span> <span class="hljs-comment">// call generateQR on some timeout or error</span>
+client.onReadyForPhoneAuthentication = <span class="hljs-function">(<span class="hljs-params">[ref, publicKey, clientID]</span>) =&gt;</span> {
+    generateQR = <span class="hljs-keyword">async</span> () =&gt; {
+        ref = <span class="hljs-keyword">await</span> client.generateNewQRCode () <span class="hljs-comment">// returns a new ref code to use for QR generation</span>
+        <span class="hljs-keyword">const</span> str = ref + <span class="hljs-string">&#x27;,&#x27;</span> + publicKey + <span class="hljs-string">&#x27;,&#x27;</span> + clientID <span class="hljs-comment">// the QR string</span>
+        <span class="hljs-comment">// re-print str as QR or update in UI or send somewhere</span>
+        <span class="hljs-comment">//QR.generate(str, { small: true })</span>
+    }
+}
+<span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> client.connect ()</code></pre>
+				<a href="#handling-events" id="handling-events" style="color: inherit; text-decoration: none;">
+					<h2>Handling Events</h2>
+				</a>
+				<p>Implement the following callbacks in your code:</p>
+				<ul>
+					<li><p>Called when you have a pending unread message or recieve a new message</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">import</span> { getNotificationType } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+<span class="hljs-comment">// set first param to `true` if you want to receive outgoing messages that may be sent from your phone</span>
+client.setOnUnreadMessage (<span class="hljs-literal">false</span>, <span class="hljs-function">(<span class="hljs-params">m: WAMessage</span>) =&gt;</span> {
+    <span class="hljs-comment">// get what type of notification it is -- message, group add notification etc.</span>
+    <span class="hljs-keyword">const</span> [notificationType, messageType] = getNotificationType(m)
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;got notification of type: &quot;</span> + notificationType) <span class="hljs-comment">// message, groupAdd, groupLeave</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;message type: &quot;</span> + messageType) <span class="hljs-comment">// conversation, imageMessage, videoMessage, contactMessage etc.</span>
+})</code></pre>
+					</li>
+					<li><p>Called when you recieve an update on someone&#39;s presence, they went offline or online</p>
+						<pre><code class="language-ts">client.setOnPresenceUpdate (<span class="hljs-function">(<span class="hljs-params">json: PresenceUpdate</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(json.id + <span class="hljs-string">&quot; presence is &quot;</span> + json.type))</code></pre>
+					</li>
+					<li><p>Called when your message gets delivered or read</p>
+						<pre><code class="language-ts">client.setOnMessageStatusChange (<span class="hljs-function">(<span class="hljs-params">json: MessageStatusUpdate</span>) =&gt;</span> {
+    <span class="hljs-keyword">let</span> sent = json.to
+    <span class="hljs-keyword">if</span> (json.participant) <span class="hljs-comment">// participant exists when the message is from a group</span>
+        sent += <span class="hljs-string">&quot; (&quot;</span>+json.participant+<span class="hljs-string">&quot;)&quot;</span> <span class="hljs-comment">// mention as the one sent to</span>
+    <span class="hljs-comment">// log that they acknowledged the message</span>
+    <span class="hljs-built_in">console</span>.log(sent + <span class="hljs-string">&quot; acknowledged message(s) &quot;</span> + json.ids + <span class="hljs-string">&quot; as &quot;</span> + json.type + <span class="hljs-string">&quot; at &quot;</span> + json.timestamp)
+})</code></pre>
+					</li>
+					<li><p>Called when the connection gets disconnected (either the server loses internet, the phone gets unpaired, or the connection is taken over from somewhere)</p>
+						<pre><code class="language-ts">client.setOnUnexpectedDisconnect (<span class="hljs-function"><span class="hljs-params">reason</span> =&gt;</span> <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;disconnected unexpectedly: &quot;</span> + reason) )</code></pre>
+						<a href="#sending-messages" id="sending-messages" style="color: inherit; text-decoration: none;">
+							<h2>Sending Messages</h2>
+						</a>
+					</li>
+				</ul>
+				<p>Send like, all types of messages with a single function:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { MessageType, MessageOptions, Mimetype } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+
+<span class="hljs-keyword">const</span> id = <span class="hljs-string">&#x27;abcd@s.whatsapp.net&#x27;</span> <span class="hljs-comment">// the WhatsApp ID </span>
+<span class="hljs-comment">// send a simple text!</span>
+client.sendMessage (id, <span class="hljs-string">&#x27;oh hello there&#x27;</span>, MessageType.text)
+<span class="hljs-comment">// send a location!</span>
+client.sendMessage(id, {degreeslatitude: <span class="hljs-number">24.121231</span>, degreesLongitude: <span class="hljs-number">55.1121221</span>}, MessageType.location)
+<span class="hljs-comment">// send a contact!</span>
+<span class="hljs-keyword">const</span> vcard = <span class="hljs-string">&#x27;BEGIN:VCARD\n&#x27;</span> <span class="hljs-comment">// metadata of the contact card</span>
+            + <span class="hljs-string">&#x27;VERSION:3.0\n&#x27;</span> 
+            + <span class="hljs-string">&#x27;FN:Jeff Singh\n&#x27;</span> <span class="hljs-comment">// full name</span>
+            + <span class="hljs-string">&#x27;ORG:Ashoka Uni;\n&#x27;</span> <span class="hljs-comment">// the organization of the contact</span>
+            + <span class="hljs-string">&#x27;TEL;type=CELL;type=VOICE;waid=911234567890:+91 12345 67890\n&#x27;</span> <span class="hljs-comment">// WhatsApp ID + phone number</span>
+            + <span class="hljs-string">&#x27;END:VCARD&#x27;</span>
+client.sendMessage(id, {displayname: <span class="hljs-string">&quot;Jeff&quot;</span>, vcard: vcard}, MessageType.contact)
+<span class="hljs-comment">// send a gif</span>
+<span class="hljs-keyword">const</span> buffer = fs.readFileSync(<span class="hljs-string">&quot;Media/ma_gif.mp4&quot;</span>) <span class="hljs-comment">// load some gif</span>
+<span class="hljs-keyword">const</span> options: MessageOptions = {mimetype: Mimetype.gif, caption: <span class="hljs-string">&quot;hello!&quot;</span>} <span class="hljs-comment">// some metadata &amp; caption</span>
+client.sendMessage(id, buffer, MessageType.video, options)</code></pre>
+				<p>To note:</p>
+				<ul>
+					<li><code>id</code> is the WhatsApp ID of the person or group you&#39;re sending the message to. <ul>
+							<li>It must be in the format <code>[country code][phone number]@s.whatsapp.net</code>, for example <code>+19999999999@s.whatsapp.net</code> for people. For groups, it must be in the format <code>123456789-123345@g.us</code>. </li>
+							<li><strong>Do not attach</strong> <code>@c.us</code> for individual people IDs, It won&#39;t work.</li>
+							<li>Please do not explicitly disable ID validation (in <code>MessageOptions</code>) because then your messages may fail for no apparent reason.</li>
+						</ul>
+					</li>
+					<li>For media messages, the thumbnail can be generated automatically for images &amp; stickers. Thumbnails for videos can also be generated automatically, though, you need to have <code>ffmpeg</code> installed on your system.</li>
+					<li><strong>MessageOptions</strong>: some extra info about the message. It can have the following <strong>optional</strong> values:<pre><code class="language-ts"><span class="hljs-keyword">const</span> info: MessageOptions = {
+    quoted: quotedMessage, <span class="hljs-comment">// the message you want to quote</span>
+    contextInfo: { forwardingScore: <span class="hljs-number">2</span>, isForwarded: <span class="hljs-literal">true</span> }, <span class="hljs-comment">// some random context info </span>
+    <span class="hljs-comment">// (can show a forwarded message with this too)</span>
+    timestamp: <span class="hljs-built_in">Date</span>(), <span class="hljs-comment">// optional, if you want to manually set the timestamp of the message</span>
+    validateID: <span class="hljs-literal">true</span>, <span class="hljs-comment">// if you want to validate the ID before sending the message, true by default</span>
+    caption: <span class="hljs-string">&quot;hello there!&quot;</span>, <span class="hljs-comment">// (for media messages) the caption to send with the media (cannot be sent with stickers though)</span>
+    thumbnail: <span class="hljs-string">&quot;23GD#4/==&quot;</span>, <span class="hljs-comment">/*  (for location &amp; media messages) has to be a base 64 encoded JPEG if you want to send a custom thumb, 
+                                or set to null if you don&#x27;t want to send a thumbnail.
+                                Do not enter this field if you want to automatically generate a thumb
+                            */</span>
+    mimetype: Mimetype.pdf, <span class="hljs-comment">/* (for media messages) specify the type of media (optional for all media types except documents),
+                                    import {Mimetype} from &#x27;@adiwajshing/baileys&#x27;
+                            */</span>
+    filename: <span class="hljs-string">&#x27;somefile.pdf&#x27;</span> <span class="hljs-comment">// (for media messages) file name for the media</span>
+}</code></pre>
+						<a href="#forwarding-messages" id="forwarding-messages" style="color: inherit; text-decoration: none;">
+							<h2>Forwarding Messages</h2>
+						</a>
+					</li>
+				</ul>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> messages = <span class="hljs-keyword">await</span> client.loadConversation (<span class="hljs-string">&#x27;1234@s.whatsapp.net&#x27;</span>, <span class="hljs-number">1</span>)
+<span class="hljs-keyword">const</span> message = messages[<span class="hljs-number">0</span>] <span class="hljs-comment">// get the last message from this conversation</span>
+<span class="hljs-keyword">await</span> client.forwardMessage (<span class="hljs-string">&#x27;455@s.whatsapp.net&#x27;</span>, message) <span class="hljs-comment">// WA forward the message!</span></code></pre>
+				<a href="#reading-messages" id="reading-messages" style="color: inherit; text-decoration: none;">
+					<h2>Reading Messages</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> id = <span class="hljs-string">&#x27;1234-123@g.us&#x27;</span>
+<span class="hljs-keyword">const</span> messageID = <span class="hljs-string">&#x27;AHASHH123123AHGA&#x27;</span> <span class="hljs-comment">// id of the message you want to read</span>
+
+<span class="hljs-keyword">await</span> client.sendReadReceipt(id, messageID) <span class="hljs-comment">// mark as read</span>
+<span class="hljs-keyword">await</span> client.sendReadReceipt (id) <span class="hljs-comment">// mark all messages in chat as read</span>
+
+<span class="hljs-keyword">await</span> client.sendReadReceipt(id, <span class="hljs-literal">null</span>, <span class="hljs-string">&#x27;unread&#x27;</span>) <span class="hljs-comment">// mark the chat as unread</span></code></pre>
+				<ul>
+					<li><code>id</code> is in the same format as mentioned earlier. </li>
+					<li>The message ID is the unique identifier of the message that you are marking as read. </li>
+					<li>On a <code>WAMessage</code>, the <code>messageID</code> can be accessed using <code>messageID = message.key.id</code>.</li>
+				</ul>
+				<a href="#update-presence" id="update-presence" style="color: inherit; text-decoration: none;">
+					<h2>Update Presence</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Presence } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+
+client.updatePresence(id, Presence.available) </code></pre>
+				<p>This lets the person/group with <code>id</code> know whether you&#39;re online, offline, typing etc. where <code>presence</code> can be one of the following:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">export</span> <span class="hljs-built_in">enum</span> Presence {
+    available = <span class="hljs-string">&#x27;available&#x27;</span>, <span class="hljs-comment">// &quot;online&quot;</span>
+    unavailable = <span class="hljs-string">&#x27;unavailable&#x27;</span>, <span class="hljs-comment">// &quot;offline&quot;</span>
+    composing = <span class="hljs-string">&#x27;composing&#x27;</span>, <span class="hljs-comment">// &quot;typing...&quot;</span>
+    recording = <span class="hljs-string">&#x27;recording&#x27;</span>, <span class="hljs-comment">// &quot;recording...&quot;</span>
+    paused = <span class="hljs-string">&#x27;paused&#x27;</span>, <span class="hljs-comment">// I have no clue</span>
+}</code></pre>
+				<a href="#downloading-media" id="downloading-media" style="color: inherit; text-decoration: none;">
+					<h2>Downloading Media</h2>
+				</a>
+				<p>If you want to save the media you received</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { MessageType, extensionForMediaMessage } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+client.setOnUnreadMessage (<span class="hljs-literal">false</span>, <span class="hljs-keyword">async</span> m =&gt; {
+    <span class="hljs-keyword">if</span> (!m.message) <span class="hljs-keyword">return</span> <span class="hljs-comment">// if there is no text or media message</span>
+
+    <span class="hljs-keyword">const</span> messageType = <span class="hljs-built_in">Object</span>.keys (m.message)[<span class="hljs-number">0</span>]<span class="hljs-comment">// get what type of message it is -- text, image, video</span>
+    <span class="hljs-comment">// if the message is not a text message</span>
+    <span class="hljs-keyword">if</span> (messageType !== MessageType.text &amp;&amp; messageType !== MessageType.extendedText) {
+        <span class="hljs-keyword">const</span> buffer = <span class="hljs-keyword">await</span> client.downloadMediaMessage(m) <span class="hljs-comment">// to decrypt &amp; use as a buffer</span>
+
+        <span class="hljs-keyword">const</span> savedFilename = <span class="hljs-keyword">await</span> client.downloadAndSaveMediaMessage (m) <span class="hljs-comment">// to decrypt &amp; save to file</span>
+        <span class="hljs-built_in">console</span>.log(m.key.remoteJid + <span class="hljs-string">&quot; sent media, saved at: &quot;</span> + savedFilename)
+    }
+}</code></pre>
+				<a href="#deleting-messages" id="deleting-messages" style="color: inherit; text-decoration: none;">
+					<h2>Deleting Messages</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> jid = <span class="hljs-string">&#x27;1234@s.whatsapp.net&#x27;</span> <span class="hljs-comment">// can also be a group</span>
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.sendMessage (jid, <span class="hljs-string">&#x27;hello!&#x27;</span>, MessageType.text) <span class="hljs-comment">// send a message</span>
+
+<span class="hljs-keyword">await</span> client.deleteMessage (jid, {id: response.messageID, remoteJid: jid, fromMe: <span class="hljs-literal">true</span>}) <span class="hljs-comment">// will delete the sent message for everyone!</span>
+<span class="hljs-keyword">await</span> client.clearMessage (jid, {id: response.messageID, remoteJid: jid, fromMe: <span class="hljs-literal">true</span>}) <span class="hljs-comment">// will delete the sent message for only you!</span></code></pre>
+				<a href="#modifying-chats" id="modifying-chats" style="color: inherit; text-decoration: none;">
+					<h2>Modifying Chats</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">const</span> jid = <span class="hljs-string">&#x27;1234@s.whatsapp.net&#x27;</span> <span class="hljs-comment">// can also be a group</span>
+<span class="hljs-keyword">await</span> client.modifyChat (jid, ChatModification.archive) <span class="hljs-comment">// archive chat</span>
+<span class="hljs-keyword">await</span> client.modifyChat (jid, ChatModification.unarchive) <span class="hljs-comment">// unarchive chat</span>
+
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.modifyChat (jid, ChatModification.pin) <span class="hljs-comment">// pin the chat</span>
+<span class="hljs-keyword">await</span> client.modifyChat (jid, ChatModification.unpin, {stamp: response.stamp})
+
+<span class="hljs-keyword">const</span> mutedate = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span> (<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime() + <span class="hljs-number">8</span>*<span class="hljs-number">60</span>*<span class="hljs-number">60</span>*<span class="hljs-number">1000</span>) <span class="hljs-comment">// mute for 8 hours in the future</span>
+<span class="hljs-keyword">await</span> client.modifyChat (jid, ChatModification.mute, {stamp: mutedate}) <span class="hljs-comment">// mute</span>
+<span class="hljs-built_in">setTimeout</span> (<span class="hljs-function">() =&gt;</span> {
+    client.modifyChat (jid, ChatModification.unmute, {stamp: mutedate})
+}, <span class="hljs-number">5000</span>) <span class="hljs-comment">// unmute after 5 seconds</span>
+
+<span class="hljs-keyword">await</span> client.deleteChat (jid) <span class="hljs-comment">// will delete the chat (can be a group or broadcast list)</span></code></pre>
+				<p><strong>Note:</strong> to unmute or unpin a chat, one must pass the timestamp of the pinning or muting. This is returned by the pin &amp; mute functions. This is also available in the <code>WAChat</code> objects of the respective chats, as a <code>mute</code> or <code>pin</code> property.</p>
+				<a href="#misc" id="misc" style="color: inherit; text-decoration: none;">
+					<h2>Misc</h2>
+				</a>
+				<ul>
+					<li><p>To check if a given ID is on WhatsApp</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> id = <span class="hljs-string">&#x27;xyz@s.whatsapp.net&#x27;</span>
+<span class="hljs-keyword">const</span> exists = <span class="hljs-keyword">await</span> client.isOnWhatsApp (id)
+<span class="hljs-built_in">console</span>.log (<span class="hljs-string">`<span class="hljs-subst">${id}</span> <span class="hljs-subst">${exists ? <span class="hljs-string">&quot; exists &quot;</span> : <span class="hljs-string">&quot; does not exist&quot;</span>}</span> on WhatsApp`</span>)</code></pre>
+					</li>
+					<li><p>To query chat history on a group or with someone</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// query the last 25 messages (replace 25 with the number of messages you want to query)</span>
+<span class="hljs-keyword">const</span> messages = <span class="hljs-keyword">await</span> client.loadConversation (<span class="hljs-string">&quot;xyz-abc@g.us&quot;</span>, <span class="hljs-number">25</span>)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;got back &quot;</span> + messages.length + <span class="hljs-string">&quot; messages&quot;</span>)</code></pre>
+						<p>  You can also load the entire conversation history if you want</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">await</span> client.loadEntireConversation (<span class="hljs-string">&quot;xyz@c.us&quot;</span>, <span class="hljs-function"><span class="hljs-params">message</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Loaded message with ID: &quot;</span> + message.key.id))
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;queried all messages&quot;</span>) <span class="hljs-comment">// promise resolves once all messages are retreived</span></code></pre>
+					</li>
+					<li><p>To get the status of some person</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> status = <span class="hljs-keyword">await</span> client.getStatus (<span class="hljs-string">&quot;xyz@c.us&quot;</span>) <span class="hljs-comment">// leave empty to get your own status</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;status: &quot;</span> + status)</code></pre>
+					</li>
+					<li><p>To get the display picture of some person/group</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> ppUrl = <span class="hljs-keyword">await</span> client.getProfilePicture (<span class="hljs-string">&quot;xyz@g.us&quot;</span>) <span class="hljs-comment">// leave empty to get your own</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;download profile picture from: &quot;</span> + ppUrl)</code></pre>
+					</li>
+					<li><p>To change your display picture or a group&#39;s</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> jid = <span class="hljs-string">&#x27;111234567890-1594482450@g.us&#x27;</span> <span class="hljs-comment">// can be your own too</span>
+<span class="hljs-keyword">const</span> img = fs.readFileSync (<span class="hljs-string">&#x27;new-profile-picture.jpeg&#x27;</span>) <span class="hljs-comment">// can be PNG also</span>
+<span class="hljs-keyword">await</span> client.updateProfilePicture (jid, newPP)</code></pre>
+					</li>
+					<li><p>To get someone&#39;s presence (if they&#39;re typing, online)</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// the presence update is fetched and called here</span>
+client.setOnPresenceUpdate (<span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(json.id + <span class="hljs-string">&quot; presence is &quot;</span> + json.type))
+<span class="hljs-keyword">await</span> client.requestPresenceUpdate (<span class="hljs-string">&quot;xyz@c.us&quot;</span>) <span class="hljs-comment">// request the update</span></code></pre>
+					</li>
+					<li><p>To search through messages</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.searchMessages (<span class="hljs-string">&#x27;so cool&#x27;</span>, <span class="hljs-literal">null</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>) <span class="hljs-comment">// search in all chats</span>
+<span class="hljs-built_in">console</span>.log (<span class="hljs-string">`got <span class="hljs-subst">${response.messages.length}</span> messages in search`</span>)
+
+<span class="hljs-keyword">const</span> response2 = <span class="hljs-keyword">await</span> client.searchMessages (<span class="hljs-string">&#x27;so cool&#x27;</span>, <span class="hljs-string">&#x27;1234@c.us&#x27;</span>, <span class="hljs-number">25</span>, <span class="hljs-number">1</span>) <span class="hljs-comment">// search in given chat</span></code></pre>
+						<p>Of course, replace <code>xyz</code> with an actual ID.
+						Append <code>@s.whatsapp.net</code> for individuals &amp; <code>@g.us</code> for groups.</p>
+					</li>
+				</ul>
+				<a href="#groups" id="groups" style="color: inherit; text-decoration: none;">
+					<h2>Groups</h2>
+				</a>
+				<ul>
+					<li><p>To create a group</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// title &amp; participants</span>
+<span class="hljs-keyword">const</span> group = <span class="hljs-keyword">await</span> client.groupCreate (<span class="hljs-string">&quot;My Fab Group&quot;</span>, [<span class="hljs-string">&quot;abcd@s.whatsapp.net&quot;</span>, <span class="hljs-string">&quot;efgh@s.whatsapp.net&quot;</span>])
+<span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;created group with id: &quot;</span> + group.gid)
+client.sendTextMessage(group.gid, <span class="hljs-string">&quot;hello everyone&quot;</span>) <span class="hljs-comment">// say hello to everyone on the group</span></code></pre>
+					</li>
+					<li><p>To add people to a group</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// id &amp; people to add to the group (will throw error if it fails)</span>
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> client.groupAdd (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, [<span class="hljs-string">&quot;abcd@s.whatsapp.net&quot;</span>, <span class="hljs-string">&quot;efgh@s.whatsapp.net&quot;</span>])</code></pre>
+					</li>
+					<li><p>To make/demote admins on a group</p>
+						<pre><code class="language-ts"><span class="hljs-comment">// id &amp; people to make admin (will throw error if it fails)</span>
+<span class="hljs-keyword">await</span> client.groupMakeAdmin (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, [<span class="hljs-string">&quot;abcd@s.whatsapp.net&quot;</span>, <span class="hljs-string">&quot;efgh@s.whatsapp.net&quot;</span>])
+<span class="hljs-keyword">await</span> client.groupDemoteAdmin (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, [<span class="hljs-string">&quot;abcd@s.whatsapp.net&quot;</span>, <span class="hljs-string">&quot;efgh@s.whatsapp.net&quot;</span>]) <span class="hljs-comment">// demote admins</span></code></pre>
+					</li>
+					<li><p>To change group settings</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">import</span> { GroupSettingChange } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@adiwajshing/baileys&#x27;</span>
+<span class="hljs-comment">// only allow admins to send messages</span>
+<span class="hljs-keyword">await</span> client.groupSettingChange (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, GroupSettingChange.messageSend, <span class="hljs-literal">true</span>)
+<span class="hljs-comment">// allow everyone to modify the group&#x27;s settings -- like display picture etc.</span>
+<span class="hljs-keyword">await</span> client.groupSettingChange (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, GroupSettingChange.settingChange, <span class="hljs-literal">false</span>)
+<span class="hljs-comment">// only allow admins to modify the group&#x27;s settings</span>
+<span class="hljs-keyword">await</span> client.groupSettingChange (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>, GroupSettingChange.settingChange, <span class="hljs-literal">true</span>)</code></pre>
+					</li>
+					<li><p>To leave a group</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">await</span> client.groupLeave (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>) <span class="hljs-comment">// (will throw error if it fails)</span></code></pre>
+					</li>
+					<li><p>To get the invite code for a group</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> code = <span class="hljs-keyword">await</span> client.groupInviteCode (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>)
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;group code: &quot;</span> + code)</code></pre>
+					</li>
+					<li><p>To query the metadata of a group</p>
+						<pre><code class="language-ts"><span class="hljs-keyword">const</span> metadata = <span class="hljs-keyword">await</span> client.groupMetadata (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>)
+<span class="hljs-built_in">console</span>.log(json.id + <span class="hljs-string">&quot;, title: &quot;</span> + json.subject + <span class="hljs-string">&quot;, description: &quot;</span> + json.desc)
+
+<span class="hljs-comment">// Or if you&#x27;ve left the group -- call this</span>
+<span class="hljs-keyword">const</span> metadata2 = <span class="hljs-keyword">await</span> client.groupMetadataMinimal (<span class="hljs-string">&quot;abcd-xyz@g.us&quot;</span>) </code></pre>
+					</li>
+				</ul>
+				<a href="#broadcast-lists-amp-stories" id="broadcast-lists-amp-stories" style="color: inherit; text-decoration: none;">
+					<h2>Broadcast Lists &amp; Stories</h2>
+				</a>
+				<ul>
+					<li>You can send messages to broadcast lists the same way you send messages to groups &amp; individual chats.</li>
+					<li>Unfortunately, WA Web does not support creating broadcast lists right now but you can still delete them.</li>
+					<li>Broadcast IDs are in the format <code>12345678@broadcast</code></li>
+					<li>To query a broadcast list&#39;s recipients &amp; name:<pre><code class="language-ts"><span class="hljs-keyword">const</span> bList = <span class="hljs-keyword">await</span> client.getBroadcastListInfo (<span class="hljs-string">&quot;1234@broadcast&quot;</span>)
+<span class="hljs-built_in">console</span>.log (<span class="hljs-string">`list name: <span class="hljs-subst">${bList.name}</span>, recps: <span class="hljs-subst">${bList.recipients}</span>`</span>)</code></pre>
+					</li>
+				</ul>
+				<a href="#writing-custom-functionality" id="writing-custom-functionality" style="color: inherit; text-decoration: none;">
+					<h2>Writing Custom Functionality</h2>
+				</a>
+				<p>Baileys is written, keeping in mind, that you may require other custom functionality. Hence, instead of having to fork the project &amp; re-write the internals, you can simply write extensions in your own code.</p>
+				<p>First, enable the logging of unhandled messages from WhatsApp by setting</p>
+				<pre><code class="language-ts">client.logLevel = MessageLogLevel.unhandled <span class="hljs-comment">// set to MessageLogLevel.all to see all messages received</span></code></pre>
+				<p>This will enable you to see all sorts of messages WhatsApp sends in the console. Some examples:</p>
+				<ol>
+					<li><p>Functionality to track of the battery percentage of your phone.
+							You enable logging and you&#39;ll see a message about your battery pop up in the console:
+						<code>[Baileys] [Unhandled] s22, [&quot;action&quot;,null,[[&quot;battery&quot;,{&quot;live&quot;:&quot;false&quot;,&quot;value&quot;:&quot;52&quot;},null]]]</code> </p>
+						<p> You now know what a battery update looks like. It&#39;ll have the following characteristics.</p>
+						<ul>
+							<li><p>Given <code>const bMessage = [&quot;action&quot;,null,[[&quot;battery&quot;,{&quot;live&quot;:&quot;false&quot;,&quot;value&quot;:&quot;52&quot;},null]]]</code></p>
+							</li>
+							<li><p><code>bMessage[0]</code> is always <code>&quot;action&quot;</code></p>
+							</li>
+							<li><p><code>bMessage[1]</code> is always <code>null</code></p>
+							</li>
+							<li><p><code>bMessage[2][0][0]</code> is always <code>&quot;battery&quot;</code></p>
+								<p>Hence, you can register a callback for an event using the following:</p>
+								<pre><code class="language-ts">client.registerCallback ([<span class="hljs-string">&quot;action&quot;</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">&quot;battery&quot;</span>], <span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> batteryLevelStr = json[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>].value
+  <span class="hljs-keyword">const</span> batterylevel = <span class="hljs-built_in">parseInt</span> (batteryLevelStr)
+  <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;battery level: &quot;</span> + batterylevel + <span class="hljs-string">&quot;%&quot;</span>)
+})</code></pre>
+								<p>This callback will be fired any time a message is received matching the following criteria:
+								<code>message [0] === &quot;action&quot; &amp;&amp; message [1] === null &amp;&amp; message[2][0][0] === &quot;battery&quot;</code></p>
+							</li>
+						</ul>
+					</li>
+					<li><p>Functionality to keep track of the pushname changes on your phone.
+							You enable logging and you&#39;ll see an unhandled message about your pushanme pop up like this:
+						<code>[Baileys] [Unhandled] s24, [&quot;Conn&quot;,{&quot;pushname&quot;:&quot;adiwajshing&quot;}]</code> </p>
+						<p> You now know what a pushname update looks like. It&#39;ll have the following characteristics.</p>
+						<ul>
+							<li><p>Given <code>const pMessage = [&quot;Conn&quot;,{&quot;pushname&quot;:&quot;adiwajshing&quot;}] </code></p>
+							</li>
+							<li><p><code>pMessage[0]</code> is always <code>&quot;Conn&quot;</code></p>
+							</li>
+							<li><p><code>pMessage[1]</code> always has the key <code>&quot;pushname&quot;</code></p>
+							</li>
+							<li><p><code>pMessage[2]</code> is always <code>undefined</code></p>
+								<p>Following this, one can implement the following callback:</p>
+								<pre><code class="language-ts">client.registerCallback ([<span class="hljs-string">&quot;Conn&quot;</span>, <span class="hljs-string">&quot;pushname&quot;</span>], <span class="hljs-function"><span class="hljs-params">json</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> pushname = json[<span class="hljs-number">1</span>].pushname
+  client.userMetaData.name = pushname <span class="hljs-comment">// update on client too</span>
+  <span class="hljs-built_in">console</span>.log (<span class="hljs-string">&quot;Name updated: &quot;</span> + pushname)
+})</code></pre>
+								<p>This callback will be fired any time a message is received matching the following criteria:
+								<code>message [0] === &quot;Conn&quot; &amp;&amp; message [1].pushname</code></p>
+							</li>
+						</ul>
+					</li>
+				</ol>
+				<p>A little more testing will reveal that almost all WhatsApp messages are in the format illustrated above.
+				Note: except for the first parameter (in the above cases, <code>&quot;action&quot;</code> or <code>&quot;Conn&quot;</code>), all the other parameters are optional.</p>
+				<a href="#note" id="note" style="color: inherit; text-decoration: none;">
+					<h3>Note</h3>
+				</a>
+				<p> This library is in no way affiliated with WhatsApp. Use at your own discretion. Do not spam people with this.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_binary_constants_.html">&quot;<wbr>Binary/<wbr>Constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_binary_decoder_.html">&quot;<wbr>Binary/<wbr>Decoder&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_binary_encoder_.html">&quot;<wbr>Binary/<wbr>Encoder&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_binary_tests_.html">&quot;<wbr>Binary/<wbr>Tests&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_base_.html">&quot;WAClient/<wbr>Base&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_constants_.html">&quot;WAClient/<wbr>Constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_groups_.html">&quot;WAClient/<wbr>Groups&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_messages_.html">&quot;WAClient/<wbr>Messages&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_tests_.html">&quot;WAClient/<wbr>Tests&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_utils_.html">&quot;WAClient/<wbr>Utils&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waclient_waclient_.html">&quot;WAClient/WAClient&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_base_.html">&quot;WAConnection/<wbr>Base&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_browsermessagedecoding_.html">&quot;WAConnection/<wbr>Browser<wbr>Message<wbr>Decoding&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_connect_.html">&quot;WAConnection/<wbr>Connect&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_constants_.html">&quot;WAConnection/<wbr>Constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_tests_.html">&quot;WAConnection/<wbr>Tests&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_utils_.html">&quot;WAConnection/<wbr>Utils&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_validation_.html">&quot;WAConnection/<wbr>Validation&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_waconnection_waconnection_.html">&quot;WAConnection/WAConnection&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
