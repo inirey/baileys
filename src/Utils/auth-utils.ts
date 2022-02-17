@@ -121,11 +121,22 @@ export const useSingleFileAuthState = (filename: string, logger?: Logger): { sta
 
 	// save the authentication state to a file
 	const saveState = () => {
+
+		// BufferJSON replacer utility saves buffers nicely
+        let authJson = JSON.stringify({ creds, keys }, BufferJSON.replacer, 2);
+
+        // check json format
+        try {
+            JSON.parse(authJson);
+        } catch (e) {
+            logger.warn('json data format error')
+            return;
+        }
+
 		logger && logger.trace('saving auth state')
 		writeFileSync(
 			filename,
-			// BufferJSON replacer utility saves buffers nicely
-			JSON.stringify({ creds, keys }, BufferJSON.replacer, 2)
+			authJson
 		)
 	}
 	
