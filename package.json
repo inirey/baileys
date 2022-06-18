@@ -78,7 +78,7 @@
     "@types/jest": "27.4.1",
     "@types/node": "16.11.26",
     "@types/pino": "7.0.5",
-    "@types/sharp": "0.30.0",
+    "@types/sharp": "0.30.4",
     "@types/ws": "8.5.3",
     "eslint": "7.32.0",
     "jest": "27.5.1",
